@@ -1,0 +1,38 @@
+<nav class="bg-[#100E34] p-4 flex justify-between items-center h-[194px] gap-0">
+  <div class="items-center space-x-4">
+    <!-- Logo -->
+    <img src="assets/logo.png" alt="Logo" class="h-10 mr-4 w-[85.14px] h-[85.01px] absolute top-[87px] left-[75px] gap-0 ">
+   
+    <div class="w-[218px] h-[24px]  absolute top-[149px] left-[217px] ">
+      
+      
+      <!-- Menu -->
+      <a routerLink="/home" class="nav-link text-[#535177] mr-16 no-underline font-bold text-base hover:text-[#FFBF18] font-inter text-[21px] font-extrabold leading-[24.2px] text-left">Home</a>
+      <a routerLink="/cagnotte" class="nav-link text-[#535177] mr-16 no-underline font-bold text-base hover:text-[#FFBF18] font-inter text-[21px] font-extrabold leading-[24.2px] text-left">Cagnotte</a>
+    </div>
+
+  </div>
+
+  <!-- User Profile -->
+  <div class="relative bg-[#28264C] w-[240.07px] h-[85.3px] flex items-center justify-center">
+    <div class="flex items-center space-x-2 cursor-pointer" (click)="toggleDropdown()">
+      <!-- Initiales de l'utilisateur -->
+      <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-lg font-bold text-[#151430] hover:text-[#FFBF18]">
+        {{ getInitials() }}
+      </div>
+  
+      <div>
+        <!-- Nom de l'utilisateur -->
+        <span class="text-white font-inter text-[20px] w-[179.41px] h-[40px] leading-[24.2px] hover:text-[#FFBF18]">
+          {{ user.firstName }} {{ user.lastName }}
+        </span>
+      </div>
+    </div>
+  
+    <!-- Dmenu déroulant-->
+    <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+      <a href="#" (click)="logout()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Se déconnecter</a>
+    </div>
+  </div>
+  
+</nav>

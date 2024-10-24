@@ -1,17 +1,14 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterOutlet} from "@angular/router";
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router'; 
+import { NavbarComponent } from './navbar/navbar.component'; 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [
-    RouterOutlet,
-    CommonModule
-  ]
+  imports: [RouterModule, NavbarComponent],
 })
 export class AppComponent {
-  title = 'kitty-cash';
+ 
 }

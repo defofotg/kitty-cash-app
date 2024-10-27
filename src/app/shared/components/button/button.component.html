@@ -1,0 +1,12 @@
+<button
+  [attr.type]="type"
+  [ngClass]="[getVariantStyle(), getSizeStyle(), isLoading ? 'cursor-not-allowed' : '', fullWidth ? 'w-full' : '', 'relative animate']"
+  (click)="handleClick()"
+  [disabled]="disabled || isLoading" class="mt-10">
+  <!-- Spinner en texte pendant le chargement -->
+  <span *ngIf="isLoading">Chargement...</span>
+
+  <!-- Contenu du bouton (texte) -->
+  <ng-content *ngIf="!isLoading"></ng-content>
+  
+</button>

@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
+import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   backgroundImage = 'assets/images/login-walkpaper.png';
 
-  formGroup = new FormGroup({
+  loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
@@ -35,29 +36,23 @@ export class LoginComponent {
     chekbox: new FormControl(false, [Validators.requiredTrue]),
   });
 
-  constructor() {
-    this.formGroup.valueChanges.subscribe(() => console.log(this.formGroup));
-  }
-
-  /**to gerer les deux fonction
-   */
-  onSubmit() {
-    if (this.formGroup.valid) {
-      console.log('Données du formulaire :', this.formGroup.value);
-    } else {
-      console.log('Le formulaire est invalide');
-    }
+  constructor( private authenticationService: AuthenticationService ) {
+    this.loginForm.valueChanges.subscribe(() => console.log(this.loginForm));
   }
 
   loading = false;
 
+  
   handleButtonClick() {
-    this.loading = true;
-
-    // Simule une requête API ou autre action
-    setTimeout(() => {
-      this.loading = false;
-      console.log('Action du bouton exécutée');
-    }, 2000);
+    if (!!this.loginForm.value.email && !!this.loginForm.value.password) {
+      this.loading = true;
+      this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+          next:() => {console.log('HTTP response : LOGIN SECCESSFULL');} ,
+          error: ()=>  {console.log('HTTP Error : loginfaild')},
+          complete: ()=> {this.loading = false}
+        })
+    }
   }
+    
+  
 }

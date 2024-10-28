@@ -6,7 +6,6 @@ module.exports = {
     "./src/**/*.{html,ts}",
     "./node_modules/flowbite/**/*.js"
   ],
-  theme: {
 
     theme: {
       /*modification de tailwind.js*/
@@ -144,4 +143,4 @@ module.exports = {
     require('flowbite/plugin')
   ],
 }
-}
+

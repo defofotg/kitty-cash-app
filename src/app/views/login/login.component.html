@@ -9,9 +9,9 @@
             <div class="">
 
                 <span class="text-4xl">Connexion</span>
-                <app-form [formGroup]="formGroup">
-                    <app-input type="email" [control]="formGroup.controls.email" placeholder="entrez votre email" nameIconLeft="fa-solid  fa-envelope" inputSize="w-[400px]"></app-input>
-                    <app-input type="password" [control]="formGroup.controls.password" placeholder="entrez votre mot de passe" nameIconLeft="fas  fa-lock" nameIconRight="fas fa-eye-slash" inputSize="w-[399px]"></app-input>
+                <app-form [formGroup]="loginForm">
+                    <app-input type="email" [control]="loginForm.controls.email" placeholder="entrez votre email" nameIconLeft="fa-solid  fa-envelope" inputSize="w-[400px]"></app-input>
+                    <app-input type="password" [control]="loginForm.controls.password" placeholder="entrez votre mot de passe" nameIconLeft="fas  fa-lock" nameIconRight="fas fa-eye-slash" inputSize="w-[399px]"></app-input>
                     <app-button type="submit"  size="medium" variant="accent" [isLoading]="loading" [disabled]="false" (action)="handleButtonClick()" [fullWidth]="true">Connexion</app-button>
                     <nav class="mt-4 ms-3 text-caption4 text-tertiary"><a href="#">Mot de passe oublié</a></nav>
                 </app-form>

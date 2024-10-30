@@ -8,5 +8,5 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'cagnotte', component: CagnotteComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

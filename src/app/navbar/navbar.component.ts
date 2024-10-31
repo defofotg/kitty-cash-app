@@ -37,8 +37,8 @@ export class NavbarComponent {
      }
    }
 
-  //Méthode qui sert à déconnecter l'utilisateur. Elle supprime le userToken(un jeton qui identifie l'utilisateur) du localStorage et redirige l'utilisateur vers la page de connexion en utilisant this.router.navigate(['/login']).
-  logout() {
+
+   logout() {
     localStorage.removeItem('userToken');
     this.router.navigate(['/login']);
   }

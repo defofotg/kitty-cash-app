@@ -6,14 +6,16 @@ module.exports = {
     "./src/**/*.{html,ts}",
     "./node_modules/flowbite/**/*.js"
   ],
+
   theme: {
+    /*modification de tailwind.js*/
+
     colors: {
       white: '#FFFFFF',
-      black: '#100e34',
+      black: '100e34',
       primary: {
-        600: '#ffd35f',
-        DEFAULT: '#ffbf18',
-
+          600: '#ffd35f',
+          DEFAULT: '#ffbf18',
       },
       secondary: {
         200: '#28264c', //opacity 4%
@@ -30,6 +32,7 @@ module.exports = {
         warning: "#FEB72F",
       }
     },
+
     fontSize: {
       '8xl': ['120px', { /* pour display*/
         lineHeight: '120px',
@@ -103,11 +106,13 @@ module.exports = {
         fontWeight: '400',
       }],
 
+
       'caption2': ['18px', {
         lineHeight: '20px',
         letterSpacing: '-0.30000001192092896px',
         fontWeight: '400',
       }],
+
 
       'caption3': ['16px', {
         lineHeight: '18px',
@@ -115,16 +120,19 @@ module.exports = {
         fontWeight: '400',
       }],
 
+
       'caption4': ['13px', {
         lineHeight: '15px',
         letterSpacing: '-0.2000000298023224px',
         fontWeight: '400',
       }],
     },
+
     borderRadius: {
       DEFAULT: '10px',
       full: '100%',
     },
+
     extend: {
       spacing: {
         '194': '194px',
@@ -158,3 +166,4 @@ module.exports = {
     ],
   }
 }
+

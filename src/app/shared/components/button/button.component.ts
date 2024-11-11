@@ -17,11 +17,12 @@ export class ButtonComponent {
     | 'disabled'
     | 'success'
     | 'danger' = 'accent';
-  @Input() disabled: boolean = false;
+  @Input() disabled:  boolean = false;
   @Input() isLoading: boolean = false;
   @Input() type: 'button' | 'submit' = 'button';
   @Input() fullWidth: boolean = false;
   @Output() action = new EventEmitter<void>();
+
 
   handleClick() {
     if (!this.disabled && !this.isLoading) {

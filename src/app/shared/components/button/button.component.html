@@ -1,8 +1,8 @@
 <button
   [attr.type]="type"
-  [ngClass]="[getVariantStyle(), getSizeStyle(), isLoading ? 'cursor-not-allowed' : '', fullWidth ? 'w-full' : '', 'relative animate']"
+  [ngClass]="[getVariantStyle(), getSizeStyle(), isLoading || disabled ? 'cursor-not-allowed bg-primary-600 ' : '', fullWidth ? 'w-full' : '', 'relative animate']"
   (click)="handleClick()"
-  [disabled]="disabled || isLoading" class="mt-10">
+   class="mt-10">
   <!-- Spinner en texte pendant le chargement -->
   <span *ngIf="isLoading">Chargement...</span>
 

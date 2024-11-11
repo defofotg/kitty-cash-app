@@ -3,4 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 @import "@fortawesome/fontawesome-free/css/all.css";
+
+*{
+    outline: none;
+    box-sizing: border-box;
+}
 //@import "flowbite";

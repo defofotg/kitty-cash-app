@@ -11,8 +11,8 @@ module.exports = {
       white: '#FFFFFF',
       black: '#100e34',
       primary: {
-          600: '#ffd35f',
-          DEFAULT: '#ffbf18',
+        600: '#ffd35f',
+        DEFAULT: '#ffbf18',
 
       },
       secondary: {
@@ -30,8 +30,6 @@ module.exports = {
         warning: "#FEB72F",
       }
     },
-
-
     fontSize: {
       '8xl': ['120px', { /* pour display*/
         lineHeight: '120px',
@@ -105,13 +103,11 @@ module.exports = {
         fontWeight: '400',
       }],
 
-
       'caption2': ['18px', {
         lineHeight: '20px',
         letterSpacing: '-0.30000001192092896px',
         fontWeight: '400',
       }],
-
 
       'caption3': ['16px', {
         lineHeight: '18px',
@@ -119,19 +115,15 @@ module.exports = {
         fontWeight: '400',
       }],
 
-
       'caption4': ['13px', {
         lineHeight: '15px',
         letterSpacing: '-0.2000000298023224px',
         fontWeight: '400',
       }],
     },
-
-
-
     borderRadius: {
-    DEFAULT: '10px',
-    full: '100%',
+      DEFAULT: '10px',
+      full: '100%',
     },
     extend: {
       spacing: {
@@ -145,7 +137,6 @@ module.exports = {
         '240': '240.07px',
         '48': '48px',
         '10': '40px',
-
       },
       height: {
         '95': '95.01px',
@@ -158,14 +149,12 @@ module.exports = {
         '72': '72px',
         '144': '144px',
       },
-
       fontFamily: {
         sans: ['"Inter"', ...defaultTheme.fontFamily.sans]
       },
-
-  },
-  plugins: [
-    require('flowbite/plugin')
-  ],
-}
+    },
+    plugins: [
+      require('flowbite/plugin')
+    ],
+  }
 }

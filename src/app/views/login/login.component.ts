@@ -32,17 +32,24 @@ export class LoginComponent {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
-    ]),
-    chekbox: new FormControl(false, [Validators.requiredTrue]),
+     ]),
+    // chekbox: new FormControl(false, [Validators.requiredTrue]),
   });
 
-  constructor( private authenticationService: AuthenticationService ) {
-    this.loginForm.valueChanges.subscribe(() => console.log(this.loginForm));
+  loading = false;
+  desable = true;
+
+  constructor(private authenticationService: AuthenticationService) {
+    this.loginForm.valueChanges.subscribe(() => {
+      this.desable = !(
+        this.loginForm.valid && this.loginForm.value.email && this.loginForm.value.password
+      );
+     
+      console.log(this.loginForm);
+    });
   }
 
-  loading = false;
 
-  
   handleButtonClick() {
     if (!!this.loginForm.value.email && !!this.loginForm.value.password) {
       this.loading = true;
@@ -54,5 +61,7 @@ export class LoginComponent {
     }
   }
     
-  
+
 }
+
+

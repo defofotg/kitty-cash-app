@@ -59,13 +59,20 @@ export class LoginComponent {
             console.log('HTTP response : login Successful');
             this.toastr.success("Login Successful");
             } ,
-          error: ()=>  {console.log('HTTP Error : login failed')},
+          error: ()=>  {
+            console.log('HTTP Error : login failed'); 
+            this.toastr.error("Login faild");
+          },
           complete: ()=> {this.loading = false}
         })
+
     }
   }
 
+success(){
+  this.toastr.error('ok', 'le lien de lápi ne passe pas');
 
+}
 }
 
 

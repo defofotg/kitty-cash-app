@@ -10,6 +10,7 @@ import {
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -39,12 +40,12 @@ export class LoginComponent {
   loading = false;
   desable = true;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService, private toastr: ToastrService) {
     this.loginForm.valueChanges.subscribe(() => {
       this.desable = !(
         this.loginForm.valid && this.loginForm.value.email && this.loginForm.value.password
       );
-     
+
       console.log(this.loginForm);
     });
   }
@@ -54,13 +55,16 @@ export class LoginComponent {
     if (!!this.loginForm.value.email && !!this.loginForm.value.password) {
       this.loading = true;
       this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-          next:() => {console.log('HTTP response : LOGIN SECCESSFULL');} ,
-          error: ()=>  {console.log('HTTP Error : loginfaild')},
+          next:() => {
+            console.log('HTTP response : login Successful');
+            this.toastr.success("Login Successful");
+            } ,
+          error: ()=>  {console.log('HTTP Error : login failed')},
           complete: ()=> {this.loading = false}
         })
     }
   }
-    
+
 
 }
 

@@ -1,3 +1,4 @@
+import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
@@ -14,7 +15,7 @@ export class NavbarComponent {
   isDropdownOpen = false;
   
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authenticationService:AuthenticationService) {}
 
 //Méthode qui renvoie les initiales de l'utilisateur ex:GD.
   getInitials(): string {
@@ -39,8 +40,7 @@ export class NavbarComponent {
 
 
    logout() {
-    localStorage.removeItem('userToken');
-    this.router.navigate(['/login']);
+    this.authenticationService.logout();
   }
 
  

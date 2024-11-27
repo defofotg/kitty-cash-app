@@ -1,3 +1,4 @@
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
@@ -12,9 +13,10 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   user = { firstName: 'george', lastName: 'Defo' };
   isDropdownOpen = false;
+  loading: boolean = false;  
   
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private AuthenticationService:AuthenticationService) {}
 
 //Méthode qui renvoie les initiales de l'utilisateur ex:GD.
   getInitials(): string {
@@ -37,11 +39,47 @@ export class NavbarComponent {
      }
    }
 
-
-   logout() {
-    localStorage.removeItem('userToken');
-    this.router.navigate(['/login']);
+   handleLogout(): void {
+    const authToken = localStorage.getItem('userToken');
+    if (!authToken) {
+      console.error('Token de déconnexion introuvable.');
+      return;
+    }
+  
+    this.loading = true;
+  
+    this.AuthenticationService.logout(authToken).subscribe({
+      next: (response: string) => {
+        console.log('httpResponse :', response);
+        if (response === 'Logout successful') {
+          localStorage.removeItem('userToken');
+          this.router.navigate(['/login']);
+        }else{
+          console.log('httpResponse:', response)
+        }
+      },
+      error: (err) => {
+        console.error('Erreur lors de la déconnexion.', err);
+        alert('Impossible de vous déconnecter. Veuillez réessayer.');
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
+  
+  
+
+  isLoggedIn(): boolean {
+    return this.AuthenticationService.isLoggedIn();
+
+  }
+  
+  
+}
+  
+
+
 
  
-}
+

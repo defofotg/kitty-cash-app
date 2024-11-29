@@ -26,10 +26,16 @@ export class AuthenticationService {
     );
 
   }
-  logout() {
-    localStorage.removeItem('userToken');
-    //this.clearSession();
-    this.router.navigate(['/login']);
+
+
+  logout():Observable<void> {
+    return this.httpClient.post<void>(this.apiUrl + '/logout', {}).pipe(
+      catchError(error => {
+        console.log('Erreur lors de la deconnexion cote serveur :', error);
+        return EMPTY;
+      })
+    );
+     
   }
 
   isLoggedIn(): boolean {

@@ -3,11 +3,11 @@ import { HomeComponent } from './views/home/home.component';
 import { CagnotteComponent } from './cagnotte/cagnotte.component';
 
 import { LoginComponent } from './views/login/login.component';
-import { canactivateauthGuard } from './shared/Authoguard/canactivateauth.guard';
+import { canActivateAuthGuard } from './shared/Authoguard/canActivateAuth-guard';
 
 export const routes: Routes = [
-  { path: 'home', component: HomeComponent,canActivate:[canactivateauthGuard] },
-  { path: 'cagnotte', component: CagnotteComponent,canActivate:[canactivateauthGuard] },
+  { path: 'home', component: HomeComponent,canActivate:[canActivateAuthGuard] },
+  { path: 'cagnotte', component: CagnotteComponent,canActivate:[canActivateAuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

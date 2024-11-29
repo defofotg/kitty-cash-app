@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   user = { firstName: 'george', lastName: 'Defo' };
   isDropdownOpen = false;
+  loading: boolean = false;
+  
+  
   
 
   constructor(private router: Router, private authenticationService:AuthenticationService) {}
@@ -39,9 +42,24 @@ export class NavbarComponent {
    }
 
 
-   logout() {
-    this.authenticationService.logout();
+   handlelogout() {
+    this.loading = true ;
+   
+    
+    this.authenticationService.logout().subscribe({
+    next:() => {
+        console.log('HTTP response : DECONNEXION REUSSIE.');
+      },
+      error: () => {
+        console.log('HTTP Error : échec de la déconnexion');
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
+
+
 
  
 }

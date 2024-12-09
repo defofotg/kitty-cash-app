@@ -1,3 +1,4 @@
+import { LogoutService } from './../../services/logout/logout.service';
 import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -18,7 +19,7 @@ export class NavbarComponent {
   
   
 
-  constructor(private router: Router, private authenticationService:AuthenticationService) {}
+  constructor(private router: Router, private LogoutService:LogoutService) {}
 
 //Méthode qui renvoie les initiales de l'utilisateur ex:GD.
   getInitials(): string {
@@ -42,22 +43,25 @@ export class NavbarComponent {
    }
 
 
-   handlelogout() {
-    this.loading = true ;
-   
-    
-    this.authenticationService.logout().subscribe({
-    next:() => {
-        console.log('HTTP response : DECONNEXION REUSSIE.');
+   handleLogout(): void {
+    this.loading = true;
+  
+    const authToken = localStorage.getItem('userToken') || '';
+    this.LogoutService.logout(authToken).subscribe({
+      next: () => {
+        console.log('Déconnexion réussie.');
+        localStorage.clear();
+        this.router.navigate(['/login']);
       },
       error: () => {
-        console.log('HTTP Error : échec de la déconnexion');
+        console.error('Erreur lors de la déconnexion.');
       },
       complete: () => {
         this.loading = false;
       },
     });
   }
+  
 
 
 

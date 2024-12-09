@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../../model/login-response.model';
 import { catchError, EMPTY, Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,4 +25,10 @@ export class AuthenticationService {
     );
 
   }
+
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('userToken');
+  }
+ 
 }

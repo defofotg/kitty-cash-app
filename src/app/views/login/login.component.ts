@@ -47,7 +47,10 @@ export class LoginComponent {
     if (!!this.loginForm.value.email && !!this.loginForm.value.password) {
       this.loading = true;
       this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-          next:() => {console.log('HTTP response : LOGIN SECCESSFULL');} ,
+          next:(response) => {console.log('HTTP response : LOGIN SECCESSFULL');
+            if (response.accessToken) {
+              localStorage.setItem('userToken', response.accessToken);}
+          } ,
           error: ()=>  {console.log('HTTP Error : loginfaild')},
           complete: ()=> {this.loading = false}
         })

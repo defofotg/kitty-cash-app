@@ -1,17 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../../model/login-response.model';
-import { catchError, EMPTY, Observable } from 'rxjs';
+import { catchError, EMPTY, Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = environment.api + '/auth';
+  private apiUrl = environment.api + '/auth'; 
 
-  constructor( private httpClient: HttpClient ) {  }
+  constructor( private httpClient: HttpClient, private router: Router ) {  }
 
   login(username? : string, password? : string): Observable<LoginResponse>{
     return this.httpClient.post <LoginResponse>(this.apiUrl + '/login',{
@@ -26,6 +27,20 @@ export class AuthenticationService {
 
   }
 
+  logout(authToken: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'AuthToken': authToken
+    });
+  
+    
+    return this.httpClient.post(this.apiUrl + '/logout', {}, { headers, responseType: 'text' }).pipe(
+      catchError((error) => {
+        console.error('error :', error);
+        return EMPTY;
+      })
+    );
+  }
+  
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('userToken');

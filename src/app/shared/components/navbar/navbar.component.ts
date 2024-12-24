@@ -14,7 +14,7 @@ export class NavbarComponent {
   user = { firstName: 'george', lastName: 'Defo' };
   isDropdownOpen = false;
   loading: boolean = false;
-  
+  islogin=false;
   
   
 
@@ -59,9 +59,12 @@ export class NavbarComponent {
       complete: () => (this.loading = false),
     });
   }
-  
-  
 
+  isLoggedIn(): boolean {
+    return this.AuthenticationService.isLoggedIn();
+  }
+  
+  
 }
   
 

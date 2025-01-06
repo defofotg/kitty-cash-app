@@ -1,4 +1,4 @@
-import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
@@ -45,23 +45,31 @@ export class NavbarComponent {
     const authToken = localStorage.getItem('userToken');
     if (!authToken) {
       console.error('Token de déconnexion introuvable.');
-      return; 
+      return;
     }
   
     this.loading = true;
+  
     this.AuthenticationService.logout(authToken).subscribe({
       next: (response: string) => {
         console.log('httpResponse :', response);
         localStorage.removeItem('userToken');
         this.router.navigate(['/login']);
       },
-      error: (err) => console.error('Erreur lors de la déconnexion.', err),
-      complete: () => (this.loading = false),
+      error: (err) => {
+        console.error('Erreur lors de la déconnexion.', err);
+      },
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
+  
+  
 
   isLoggedIn(): boolean {
     return this.AuthenticationService.isLoggedIn();
+
   }
   
   

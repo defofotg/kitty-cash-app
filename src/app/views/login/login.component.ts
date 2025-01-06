@@ -9,7 +9,8 @@ import {
 } from '@angular/forms';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
-import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
+import { AuthenticationService } from './../../shared/services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,7 @@ export class LoginComponent {
     chekbox: new FormControl(false, [Validators.requiredTrue]),
   });
 
-  constructor( private authenticationService: AuthenticationService ) {
+  constructor( private AuthenticationService: AuthenticationService, private router: Router ) {
     this.loginForm.valueChanges.subscribe(() => console.log(this.loginForm));
   }
 
@@ -46,10 +47,12 @@ export class LoginComponent {
   handleButtonClick() {
     if (!!this.loginForm.value.email && !!this.loginForm.value.password) {
       this.loading = true;
-      this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+      this.AuthenticationService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
           next:(response) => {console.log('HTTP response : LOGIN SECCESSFULL');
             if (response.accessToken) {
               localStorage.setItem('userToken', response.accessToken);}
+              this.router.navigate(['/home']);
+
           } ,
           error: ()=>  {console.log('HTTP Error : loginfaild')},
           complete: ()=> {this.loading = false}

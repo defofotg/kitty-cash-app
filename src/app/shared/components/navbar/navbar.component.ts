@@ -13,9 +13,7 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   user = { firstName: 'george', lastName: 'Defo' };
   isDropdownOpen = false;
-  loading: boolean = false;
-  islogin=false;
-  
+  loading: boolean = false;  
   
 
   constructor(private router: Router, private AuthenticationService:AuthenticationService) {}
@@ -53,11 +51,16 @@ export class NavbarComponent {
     this.AuthenticationService.logout(authToken).subscribe({
       next: (response: string) => {
         console.log('httpResponse :', response);
-        localStorage.removeItem('userToken');
-        this.router.navigate(['/login']);
+        if (response === 'Logout successful') {
+          localStorage.removeItem('userToken');
+          this.router.navigate(['/login']);
+        }else{
+          console.log('httpResponse:', response)
+        }
       },
       error: (err) => {
         console.error('Erreur lors de la déconnexion.', err);
+        alert('Impossible de vous déconnecter. Veuillez réessayer.');
       },
       complete: () => {
         this.loading = false;

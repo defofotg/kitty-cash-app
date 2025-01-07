@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../../../environments/environment';
 import { LoginResponse } from '../../model/login-response.model';
-import { catchError, EMPTY, Observable, tap } from 'rxjs';
-import { Router } from '@angular/router';
+import { catchError, EMPTY, Observable, tap, throwError } from 'rxjs';
+//import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   private apiUrl = environment.api + '/auth'; 
 
-  constructor( private httpClient: HttpClient, private router: Router ) {  }
+  constructor( private httpClient: HttpClient ) {  }
 
   login(username? : string, password? : string): Observable<LoginResponse>{
     return this.httpClient.post <LoginResponse>(this.apiUrl + '/login',{
@@ -41,7 +41,8 @@ export class AuthenticationService {
         }),
         catchError((error) => {
           console.error('Erreur lors de la déconnexion.', error);
-          return EMPTY;
+          return throwError(() => new Error('La déconnexion a échoué. Veuillez réessayer.'));
+        
         })
       );
   }

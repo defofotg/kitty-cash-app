@@ -1,1 +1,7 @@
+input {
+  @apply border-none;
+}
 
+input:focus, input:active {
+  @apply focus:[box-shadow:none];
+}

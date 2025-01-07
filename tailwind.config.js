@@ -27,7 +27,7 @@ module.exports = {
         DEFAULT: '#4f48ec',
       },
       alert: {
-        danger: "#FF4E4E",
+        danger: "#f93f8c",
         success: "#90DA1A",
         warning: "#FEB72F",
       }

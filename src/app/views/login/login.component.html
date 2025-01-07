@@ -1,18 +1,34 @@
 <div class="main-content w-full h-svh">
-  <div class="grid grid-cols-2 gap-1 mb-32 bg-white">
+  <div class="hidden md:grid grid-cols-2 gap-1 mb-32 bg-white">
     <div class="h-screen bg-center bg-no-repeat bg-cover" [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}">
       <div class="flex items-center justify-center h-full">
         <img src="assets/images/logo.png" class="w-36" alt="logo">
       </div>
     </div>
     <div class="flex flex-col items-center justify-center w-full bg-purple-100 shadow-lg">
+      <div class="flex flex-col items-center justify-center md:min-w-[500px] md:max-w-7xl h-full md:h-fit md:min-h-[600px] md:px-4">
         <span class="text-purple-900 text-4xl">Bienvenue</span>
         <app-form [formGroup]="loginForm">
-          <app-input inputId="email" type="email" [control]="loginForm.controls.email" placeholder="adresse@email.com" nameIconLeft="fa-solid  fa-envelope" inputSize="w-[400px]"></app-input>
-          <app-input inputId="password" type="password" [control]="loginForm.controls.password" placeholder="••••••••••••••••••••••••" nameIconLeft="fas  fa-lock" nameIconRight="fas fa-eye-slash" inputSize="w-[399px]"></app-input>
-          <app-button type="submit"  size="medium" [isLoading]="loading" [disabled]="desable" (action)="handleButtonClick()" [fullWidth]="true">Connexion</app-button>
+          <app-input inputId="email" type="email" [control]="loginForm.controls.email" placeholder="adresse@email.com" nameIconLeft="fa-solid  fa-envelope"
+                     inputSize="w-[400px]"></app-input>
+          <app-input inputId="password" type="password" [control]="loginForm.controls.password" placeholder="••••••••••••••••••••••••" nameIconLeft="fas  fa-lock"
+                     nameIconRight="fas fa-eye-slash" inputSize="w-[399px]"></app-input>
+          <app-button type="submit" size="medium" [isLoading]="loading" [disabled]="disabled" (action)="handleButtonClick()" [fullWidth]="true">Connexion</app-button>
           <nav class="mt-4 ms-3 text-caption4 text-tertiary"><a href="#">Mot de passe oublié</a></nav>
         </app-form>
+      </div>
+
     </div>
+  </div>
+  <div class="md:hidden flex flex-col items-center justify-center h-full px-5">
+      <img src="assets/images/logo.png" class="w-36" alt="logo">
+      <app-form [formGroup]="loginForm">
+        <app-input inputId="email" type="email" [control]="loginForm.controls.email" placeholder="adresse@email.com" nameIconLeft="fa-solid  fa-envelope"
+                   inputSize="w-[300px]"></app-input>
+        <app-input inputId="password" type="password" [control]="loginForm.controls.password" placeholder="••••••••••••••••••••••••" nameIconLeft="fas  fa-lock"
+                   nameIconRight="fas fa-eye-slash" inputSize="w-[300px]"></app-input>
+        <app-button type="submit" size="medium" [isLoading]="loading" [disabled]="disabled" (action)="handleButtonClick()" [fullWidth]="true">Connexion</app-button>
+        <nav class="mt-4 ms-3 text-caption4 text-tertiary"><a href="#">Mot de passe oublié</a></nav>
+      </app-form>
   </div>
 </div>

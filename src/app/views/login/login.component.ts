@@ -38,11 +38,11 @@ export class LoginComponent {
   });
 
   loading = false;
-  desable = true;
+  disabled = true;
 
   constructor(private authenticationService: AuthenticationService, private toastr: ToastrService, private router: Router) {
     this.loginForm.valueChanges.subscribe(() => {
-      this.desable = !(
+      this.disabled = !(
         this.loginForm.valid && this.loginForm.value.email && this.loginForm.value.password
       );
     });
@@ -70,6 +70,4 @@ export class LoginComponent {
       })
     }
   }
-
-
 }

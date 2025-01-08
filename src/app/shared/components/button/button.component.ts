@@ -17,11 +17,12 @@ export class ButtonComponent {
     | 'disabled'
     | 'success'
     | 'danger' = 'accent';
-  @Input() disabled: boolean = false;
+  @Input() disabled:  boolean = false;
   @Input() isLoading: boolean = false;
   @Input() type: 'button' | 'submit' = 'button';
   @Input() fullWidth: boolean = false;
   @Output() action = new EventEmitter<void>();
+
 
   handleClick() {
     if (!this.disabled && !this.isLoading) {
@@ -33,7 +34,7 @@ export class ButtonComponent {
   getVariantStyle(): string {
     switch (this.variant) {
       case 'accent':
-        return 'bg-primary hover:bg-primary-600 text-white rounded';
+        return 'bg-primary hover:bg-purple-600 text-white rounded';
       // case 'secondary':
       //   return 'bg-primary-200 hover:bg-primary-300/50 text-primary rounded';
       // case 'outline':

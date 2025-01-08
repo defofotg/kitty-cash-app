@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {Component, HostListener, Input} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -21,21 +21,29 @@ export class InputComponent {
   @Input() inputSize?: string;
 
   errorMessages: Record<string, string> = {
-    required: 'Ce champs est requit',
-    email: 'Cet e-mail est invalid',
+    required: 'Ce champs est requis',
+    email: 'Cet e-mail est invalide',
     password: 'Ce mot de passe est invalide',
     minlength: 'Le mot de passe doit comporter au moins 6 caractères',
   };
 
-  // Méthode pour obtenir le thème de l'icône
-  //  getIconTheme(): string {
-  //      return this.iconTheme === 'black' ? 'text-black' : 'text-gray-500';
-  //    }
-  constructor() {}
 
   isPasswordVisible: boolean = false;
+  isFocused: boolean = false;
+
+
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
     this.type = this.isPasswordVisible ? 'text' : 'password';
+  }
+
+  @HostListener('focusin', ['$event'])
+  onFocus(event: FocusEvent) {
+    this.isFocused = true;
+  }
+
+  @HostListener('focusout', ['$event'])
+  onFocusout(event: FocusEvent) {
+    this.isFocused = false;
   }
 }

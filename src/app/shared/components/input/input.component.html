@@ -1,30 +1,30 @@
-
-  <div class="w-full mt-10 form-control" >
-      <div [ngClass]="[control.invalid && control.dirty ? 'border-b-alert-danger': 'border-b-secondary-200', border?'':'border-b' ]"  class="w-full ">
-      <div class="">
-        <i *ngIf="nameIconLeft" [ngClass]="[nameIconLeft]" class="me-2" ></i>
-        
-        <input 
-          [class.invalid]="control.invalid && control.dirty && control.touched "
-          [type]="type"
-          [placeholder]="placeholder" 
-          [formControl]="control" 
-          [id]="inputId"
-          [ngClass]="[inputSize, border? '': 'border-none outline-none']"/>
-          
-          <i *ngIf="nameIconRight" 
-          [ngClass]="isPasswordVisible?'fas fa-eye' :[nameIconRight] " 
-          (click)="togglePasswordVisibility()" 
-          class="cursor-pointer ms-2 color-black" 
-          (keydown.enter)="togglePasswordVisibility()"
-          aria-label="Toggle password visibility"
-           tabindex="0"></i>
-        </div>
-      </div>
-      <ng-container *ngIf="control.invalid && control.dirty ">
-        <div *ngFor="let err of control.errors | keyvalue" class="mt-2 text-caption4 text-alert-danger">
-           {{ errorMessages[err.key] }}
-        </div>
-      </ng-container>
+<div class="w-full mt-10 form-control">
+  <div [ngClass]="{'border-b-alert-danger' : control.invalid && control.dirty , 'border-b-purple-900': !(control.invalid && control.dirty) && !isFocused, 'border-b-purple-500': !(control.invalid && control.dirty) && isFocused}" class="w-full bg-white border-b-2">
+    <div class="w-full">
+      @if (nameIconLeft) {
+        <i [ngClass]="[nameIconLeft]" class="ml-3"></i>
+      }
+      <input
+        [type]="type"
+        [placeholder]="placeholder"
+        [formControl]="control"
+        [id]="inputId"
+        [ngClass]="[inputSize]"
+      />
+      @if (nameIconRight) {
+        <i [ngClass]="isPasswordVisible?'fas fa-eye' :[nameIconRight] "
+           (click)="togglePasswordVisibility()"
+           class="cursor-pointer color-black mr-3"
+           (keydown.enter)="togglePasswordVisibility()"
+           aria-label="Toggle password visibility"></i>
+      }
+    </div>
   </div>
-  
+  @if (control.invalid && control.dirty) {
+    @for (err of control.errors | keyvalue; track err.key) {
+      <div class="ml-3 mt-2 text-caption4 text-alert-danger">
+        {{ errorMessages[err.key] }}
+      </div>
+    }
+  }
+</div>

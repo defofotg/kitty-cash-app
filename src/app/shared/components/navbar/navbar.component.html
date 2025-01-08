@@ -1,0 +1,37 @@
+<nav class="bg-black p-4 flex  justify-between items-center h-194 w-full ">
+  <div class="relative flex items-center justify-end space-x-4">
+    <!-- Logo -->
+    <img src="../../../../assets/logo.png" alt="Logo" class= "mr-4 w-85 h-95">
+
+    <div  class="absolute w-218 h-24 top-72 left-144 space-x-14 ">
+      <!-- Menu -->
+      <a *ngIf="isLoggedIn()" routerLink="/home"  routerLinkActive="text-primary-600" class="  text-secondary-600   font-bold text-lg  hover:text-primary-600  ">Home</a>
+      <a *ngIf="isLoggedIn()" routerLink="/cagnotte" routerLinkActive="text-primary-600" class=" text-secondary-600 font-bold text-lg  hover:text-primary-600 ">Cagnotte</a>
+    </div>
+
+  </div>
+
+  <!-- User Profile -->
+  <div *ngIf="isLoggedIn()" class="dropdown bg-secondary-200 w-240 h-85 flex items-center justify-center ">
+    <div class="flex items-center space-x-2 cursor-pointer" (click)="toggleDropdown()">
+      <!-- Initiales de l'utilisateur -->
+      <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-lg font-bold text-secondary-200 hover:text-primary">
+        {{ getInitials() }}
+      </div>
+
+      <div>
+        <!-- Nom de l'utilisateur -->
+        <span class="text-white  text-lg  hover:text-primary">
+          {{ user.firstName }} {{ user.lastName }}
+        </span>
+      </div>
+    </div>
+
+    <!-- menu déroulant -->
+<div *ngIf="isDropdownOpen" class="absolute right-0 top-144  bg-white ">
+  <a routerLink="/login" (click)="handleLogout()" class="block px-4 py-2 ">Se déconnecter</a>
+</div>
+
+  </div>
+
+</nav>

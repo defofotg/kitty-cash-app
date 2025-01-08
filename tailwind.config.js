@@ -15,7 +15,7 @@ module.exports = {
         DEFAULT: '#ffbf18',
       },
       secondary: {
-        200: '#28264c', //opacity 4%
+        200: '#a1a5b8',
         400: '#cbd5e1',
         600: '#535177',
         DEFAULT: '#28264c',

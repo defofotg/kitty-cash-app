@@ -1,85 +1,60 @@
-import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { Component, HostListener } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common'; 
+import {AuthenticationService} from '../../services/authentication/authentication.service';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterLinkActive, RouterLink],
 })
 export class NavbarComponent {
-  user = { firstName: 'george', lastName: 'Defo' };
-  isDropdownOpen = false;
-  loading: boolean = false;  
-  
+  authService = inject(AuthenticationService);
+  toasterService = inject(ToastrService);
+  user = {firstName: 'george', lastName: 'Defo'};
+  loading = signal(false);
 
-  constructor(private router: Router, private AuthenticationService:AuthenticationService) {}
-
-//Méthode qui renvoie les initiales de l'utilisateur ex:GD.
-  getInitials(): string {
-    const { firstName, lastName } = this.user;
-    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  constructor(private router: Router) {
   }
 
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
-
-   
-   @HostListener('document:click', ['$event'])
-   handleOutsideClick(event: Event) {
-     const elementCible = event.target as HTMLElement;
-     const ClickdansMenu = elementCible.closest('.dropdown');
- 
-     if (!ClickdansMenu && this.isDropdownOpen) {
-       this.isDropdownOpen = false;
-     }
-   }
-
-   handleLogout(): void {
+  logout(): void {
     const authToken = localStorage.getItem('userToken');
     if (!authToken) {
       console.error('Token de déconnexion introuvable.');
       return;
     }
-  
-    this.loading = true;
-  
-    this.AuthenticationService.logout(authToken).subscribe({
+
+    this.loading.set(true);
+
+    this.authService.logout(authToken).subscribe({
       next: (response: string) => {
-        console.log('httpResponse :', response);
-        if (response === 'Logout successful') {
-          localStorage.removeItem('userToken');
+        if (!!response) {
+          this.toasterService.success('Vous avez été déconnecté avec succès. 👋🏾');
           this.router.navigate(['/login']);
-        }else{
-          console.log('httpResponse:', response)
         }
       },
       error: (err) => {
-        console.error('Erreur lors de la déconnexion.', err);
-        alert('Impossible de vous déconnecter. Veuillez réessayer.');
+        this.loading.set(false);
+        this.toasterService.error('Impossible de vous déconnecter. Veuillez réessayer. 📛');
       },
       complete: () => {
-        this.loading = false;
+        this.loading.set(false);
       },
     });
   }
-  
-  
 
-  isLoggedIn(): boolean {
-    return this.AuthenticationService.isLoggedIn();
-
+  getInitials(): string {
+    const {firstName, lastName} = this.user;
+    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
   }
-  
-  
 }
-  
 
 
 
- 
+
+
 

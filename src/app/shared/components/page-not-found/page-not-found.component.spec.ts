@@ -1,15 +1,17 @@
 import { PageNotFoundComponent } from './page-not-found.component';
-import {MockBuilder, MockRender} from 'ng-mocks';
-import {RouterModule} from "@angular/router";
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { RouterModule } from '@angular/router';
 
 describe('PageNotFoundComponent', () => {
   beforeEach(async () => {
-    MockBuilder(PageNotFoundComponent).keep(RouterModule.forRoot([
-      {
-        path: '**',
-        component: PageNotFoundComponent,
-      },
-    ]))
+    MockBuilder(PageNotFoundComponent).keep(
+      RouterModule.forRoot([
+        {
+          path: '**',
+          component: PageNotFoundComponent,
+        },
+      ]),
+    );
   });
 
   it('should create', () => {

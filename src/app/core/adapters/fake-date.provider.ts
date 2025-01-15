@@ -1,7 +1,6 @@
-import {DateProvider} from "@core/ports/date.provider";
+import { DateProvider } from '@core/ports/date.provider';
 
 export class FakeDateProvider extends DateProvider {
-
   date: Date = new Date();
 
   withToday(date: Date) {
@@ -10,6 +9,6 @@ export class FakeDateProvider extends DateProvider {
   }
 
   now(): Date {
-    return this.date
+    return this.date;
   }
 }

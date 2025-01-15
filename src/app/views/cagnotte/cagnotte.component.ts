@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-cagnotte',
@@ -6,8 +6,6 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   templateUrl: './cagnotte.component.html',
-  styleUrl: './cagnotte.component.scss'
+  styleUrl: './cagnotte.component.scss',
 })
-export class CagnotteComponent {
-
-}
+export class CagnotteComponent {}

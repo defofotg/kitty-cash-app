@@ -1,7 +1,7 @@
-import {DateProvider} from "@core/ports/date.provider";
+import { DateProvider } from '@core/ports/date.provider';
 
 export class SystemDateProvider extends DateProvider {
-    now() {
-        return new Date();
-    }
+  now() {
+    return new Date();
+  }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, HostListener, Input} from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -27,10 +27,8 @@ export class InputComponent {
     minlength: 'Le mot de passe doit comporter au moins 6 caractères',
   };
 
-
   isPasswordVisible: boolean = false;
   isFocused: boolean = false;
-
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -38,12 +36,12 @@ export class InputComponent {
   }
 
   @HostListener('focusin', ['$event'])
-  onFocus(event: FocusEvent) {
+  onFocus() {
     this.isFocused = true;
   }
 
   @HostListener('focusout', ['$event'])
-  onFocusout(event: FocusEvent) {
+  onFocusout() {
     this.isFocused = false;
   }
 }

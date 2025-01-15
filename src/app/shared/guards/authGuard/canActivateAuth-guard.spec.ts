@@ -4,10 +4,10 @@ import { canActivateAuthGuard } from './canActivateAuth-guard';
 
 describe('canactivateauthGuard', () => {
   let Authoguard: canActivateAuthGuard;
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    Authoguard=TestBed.inject(canActivateAuthGuard);
+    Authoguard = TestBed.inject(canActivateAuthGuard);
   });
 
   it('should be created', () => {

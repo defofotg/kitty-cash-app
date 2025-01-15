@@ -12,11 +12,13 @@
         [ngClass]="[inputSize]"
       />
       @if (nameIconRight) {
-        <i [ngClass]="isPasswordVisible?'fas fa-eye' :[nameIconRight] "
-           (click)="togglePasswordVisibility()"
-           class="cursor-pointer color-black mr-3"
-           (keydown.enter)="togglePasswordVisibility()"
-           aria-label="Toggle password visibility"></i>
+        <button (click)="togglePasswordVisibility()"
+                class="cursor-pointer color-black mr-3"
+                (keydown.enter)="togglePasswordVisibility()"
+                tabIndex="0"
+                aria-label="Toggle password visibility">
+          <i [ngClass]="isPasswordVisible?'fas fa-eye' :[nameIconRight] "></i>
+        </button>
       }
     </div>
   </div>

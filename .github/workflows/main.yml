@@ -1,0 +1,71 @@
+name: CI/CD Pipeline for Kitty Cash Front App
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  pull_request:
+    branches: [ '*' ]
+  workflow_dispatch:
+
+env:
+  IMG_NAME: ${{ github.repository }}
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code 🏁
+        uses: actions/checkout@v3
+
+      - name: Debug
+        run: echo "github.ref -> ${{ github.ref }}"
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.20'
+
+      - name: Setup cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Build the application
+        run: npm run build
+
+      - name: Lint 💄
+        run: npm run lint
+
+      - name: Test
+        run: npm run test-prod
+
+      - name: Determine deployment
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "TRIGGER=dev" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == refs/tags/v* && "${{ github.ref }}" != refs/tags/v0* ]]; then
+            echo "TRIGGER=prod" >> $GITHUB_ENV
+          fi
+
+      - name: Call deployment script
+        run: |
+          if [[ "${{ env.TRIGGER }}" == "dev" ]]; then
+            gh workflow run deploy-dev.yml
+          elif [[ "${{ env.TRIGGER }}" == "prod" ]]; then
+            gh workflow run deploy-prod.yml
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

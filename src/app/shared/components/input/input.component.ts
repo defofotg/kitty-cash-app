@@ -16,9 +16,9 @@ export class InputComponent {
   @Input() type: string = '';
   @Input() fullWidth?: boolean = false;
   @Input() border?: boolean = false;
-  @Input() nameIconLeft?: string;
+  @Input() nameIconLeft?: string = '';
   @Input() nameIconRight?: string = '';
-  @Input() inputSize?: string;
+  @Input() inputSize?: string = '';
 
   errorMessages: Record<string, string> = {
     required: 'Ce champs est requis',
@@ -43,5 +43,15 @@ export class InputComponent {
   @HostListener('focusout', ['$event'])
   onFocusout() {
     this.isFocused = false;
+  }
+
+  getBorderClass() {
+    if (this.control.invalid && this.control.dirty) {
+      return 'border-b-alert-danger';
+    } else if (!this.isFocused) {
+      return 'border-b-purple-900';
+    } else {
+      return 'border-b-purple-500';
+    }
   }
 }

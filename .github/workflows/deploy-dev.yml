@@ -1,0 +1,69 @@
+name: CI/CD Pipeline for Kitty Cash Front App - Deploy on dev
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code 🏁
+        uses: actions/checkout@v3
+
+      - name: Docker metadata for main branch ⌗🐳
+        id: metadata
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ github.repository }}
+          tags: |
+            type=raw,value=${{ github.sha }}
+
+      - name: Log in to Docker Hub 🧑🏿‍💻🐳
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image for main branch 🏗️🐳🔝
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+
+      - name: Deploy to VPS via ssh 🧑🏿‍💻 (Dev Environment)
+        uses: appleboy/ssh-action@master
+        env:
+          SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: SHA
+          script_stop: true
+          script: |
+            cd /opt/kitty-cash-front-app-dev
+            echo '#!/bin/zsh' > deploy.sh
+            echo '# Ensure a SHA code is passed as an argument' >> deploy.sh
+            echo 'if [ -z "$1" ]; then' >> deploy.sh
+            echo '  echo "Error: No SHA code provided."' >> deploy.sh
+            echo '  echo "Usage: $0 <SHA_CODE>"' >> deploy.sh
+            echo '  exit 1' >> deploy.sh
+            echo 'fi' >> deploy.sh
+            echo 'SHA=$1' >> deploy.sh
+            echo 'cd /opt/kitty-cash-front-app-dev || exit' >> deploy.sh
+            echo 'sed -i.bak "s/defofotg\/kitty-cash-app:[^ \"]*/defofotg\/kitty-cash-app:$SHA/g" docker-compose.yml' >> deploy.sh
+            echo 'echo "Display the modified docker-compose.yml for verification"' >> deploy.sh
+            echo 'cat docker-compose.yml' >> deploy.sh
+            echo 'docker-compose pull' >> deploy.sh
+            echo 'docker-compose up -d' >> deploy.sh
+
+            # Make the script executable
+            chmod +x deploy.sh
+
+            # Run the script
+            ./deploy.sh $SHA
+
+

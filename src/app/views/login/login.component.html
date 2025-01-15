@@ -13,7 +13,7 @@
                      inputSize="w-[400px]"></app-input>
           <app-input inputId="password" type="password" [control]="loginForm.controls.password" placeholder="••••••••••••••••••••••••" nameIconLeft="fas  fa-lock"
                      nameIconRight="fas fa-eye-slash" inputSize="w-[399px]"></app-input>
-          <app-button type="submit" size="medium" [isLoading]="loading" [disabled]="disabled" (action)="handleButtonClick()" [fullWidth]="true">Connexion</app-button>
+          <app-button type="submit" size="medium" [isLoading]="loading()" [disabled]="disabled()" (action)="login()" [fullWidth]="true">Connexion</app-button>
           <nav class="mt-4 ms-3 text-caption4 text-tertiary"><a href="#">Mot de passe oublié</a></nav>
         </app-form>
       </div>
@@ -27,7 +27,7 @@
                    inputSize="w-[300px]"></app-input>
         <app-input inputId="password" type="password" [control]="loginForm.controls.password" placeholder="••••••••••••••••••••••••" nameIconLeft="fas  fa-lock"
                    nameIconRight="fas fa-eye-slash" inputSize="w-[300px]"></app-input>
-        <app-button type="submit" size="medium" [isLoading]="loading" [disabled]="disabled" (action)="handleButtonClick()" [fullWidth]="true">Connexion</app-button>
+        <app-button type="submit" size="medium" [isLoading]="loading()" [disabled]="disabled()" (action)="login()" [fullWidth]="true">Connexion</app-button>
         <nav class="mt-4 ms-3 text-caption4 text-tertiary"><a href="#">Mot de passe oublié</a></nav>
       </app-form>
   </div>

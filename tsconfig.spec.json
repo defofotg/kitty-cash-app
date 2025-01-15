@@ -4,9 +4,9 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      
       "jest"
-    ]
+    ],
+    "baseUrl": "./src",
   },
   "include": [
     "src/**/*.spec.ts",

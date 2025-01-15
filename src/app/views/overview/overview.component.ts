@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {OverviewStore} from "@app/views/overview/overview.store";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { OverviewStore } from '@app/views/overview/overview.store';
 
 @Component({
   selector: 'app-overview',
@@ -7,7 +7,7 @@ import {OverviewStore} from "@app/views/overview/overview.store";
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss',
-  providers: [OverviewStore]
+  providers: [OverviewStore],
 })
 export class OverviewComponent {
   public readonly store = inject(OverviewStore);

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, HostListener, Input} from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -16,9 +16,9 @@ export class InputComponent {
   @Input() type: string = '';
   @Input() fullWidth?: boolean = false;
   @Input() border?: boolean = false;
-  @Input() nameIconLeft?: string;
+  @Input() nameIconLeft?: string = '';
   @Input() nameIconRight?: string = '';
-  @Input() inputSize?: string;
+  @Input() inputSize?: string = '';
 
   errorMessages: Record<string, string> = {
     required: 'Ce champs est requis',
@@ -27,10 +27,8 @@ export class InputComponent {
     minlength: 'Le mot de passe doit comporter au moins 6 caractères',
   };
 
-
   isPasswordVisible: boolean = false;
   isFocused: boolean = false;
-
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -38,12 +36,22 @@ export class InputComponent {
   }
 
   @HostListener('focusin', ['$event'])
-  onFocus(event: FocusEvent) {
+  onFocus() {
     this.isFocused = true;
   }
 
   @HostListener('focusout', ['$event'])
-  onFocusout(event: FocusEvent) {
+  onFocusout() {
     this.isFocused = false;
+  }
+
+  getBorderClass() {
+    if (this.control.invalid && this.control.dirty) {
+      return 'border-b-alert-danger';
+    } else if (!this.isFocused) {
+      return 'border-b-purple-900';
+    } else {
+      return 'border-b-purple-500';
+    }
   }
 }

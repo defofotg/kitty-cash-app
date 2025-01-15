@@ -1,20 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthenticationService } from './authentication.service';
+import { canActivateAuthGuard } from './can-activate-auth-guard';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-describe('AuthenticationService', () => {
-  let service: AuthenticationService;
+describe('canActivateAuthGuard', () => {
+  let authGuard: canActivateAuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
     });
-    service = TestBed.inject(AuthenticationService);
+    authGuard = TestBed.inject(canActivateAuthGuard);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(authGuard).toBeTruthy();
   });
 });

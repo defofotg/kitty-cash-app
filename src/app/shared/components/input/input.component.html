@@ -1,5 +1,5 @@
 <div class="w-full mt-10 form-control">
-  <div [ngClass]="{'border-b-alert-danger' : control.invalid && control.dirty , 'border-b-purple-900': !(control.invalid && control.dirty) && !isFocused, 'border-b-purple-500': !(control.invalid && control.dirty) && isFocused}" class="w-full bg-white border-b-2">
+  <div [ngClass]=getBorderClass() class="w-full bg-white border-b-2">
     <div class="w-full">
       @if (nameIconLeft) {
         <i [ngClass]="[nameIconLeft]" class="ml-3"></i>
@@ -12,11 +12,13 @@
         [ngClass]="[inputSize]"
       />
       @if (nameIconRight) {
-        <i [ngClass]="isPasswordVisible?'fas fa-eye' :[nameIconRight] "
-           (click)="togglePasswordVisibility()"
-           class="cursor-pointer color-black mr-3"
-           (keydown.enter)="togglePasswordVisibility()"
-           aria-label="Toggle password visibility"></i>
+        <button (click)="togglePasswordVisibility()"
+                class="cursor-pointer color-black mr-3"
+                (keydown.enter)="togglePasswordVisibility()"
+                tabIndex="0"
+                aria-label="Toggle password visibility">
+          <i [ngClass]="isPasswordVisible?'fas fa-eye' :[nameIconRight] "></i>
+        </button>
       }
     </div>
   </div>

@@ -53,7 +53,7 @@ jobs:
             echo '  exit 1' >> deploy.sh
             echo 'fi' >> deploy.sh
             echo 'SHA=$1' >> deploy.sh
-            echo 'cd /opt/kitty-cash-front-app-dev || exit' >> deploy.sh
+            echo 'cd /opt/kitty-cash/kitty-cash-app-dev || exit' >> deploy.sh
             echo 'sed -i.bak "s/defofotg\/kitty-cash-app:[^ \"]*/defofotg\/kitty-cash-app:$SHA/g" docker-compose.yml' >> deploy.sh
             echo 'echo "Display the modified docker-compose.yml for verification"' >> deploy.sh
             echo 'cat docker-compose.yml' >> deploy.sh

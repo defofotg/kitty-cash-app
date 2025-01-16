@@ -41,7 +41,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /opt/kitty-cash-front-app
+            cd /opt/kitty-cash/kitty-cash-app
             docker-compose pull
             docker-compose up -d
 

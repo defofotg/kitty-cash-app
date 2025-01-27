@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  api: 'http://mock.kitty-cash.anaitech.net/api',
+  api: 'http://dev.kitty-cash.anaitech.net/api',
 };

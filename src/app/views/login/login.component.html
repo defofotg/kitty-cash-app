@@ -26,7 +26,7 @@
         <app-input inputId="email" type="email" [control]="loginForm.controls.email" placeholder="adresse@email.com" nameIconLeft="fa-solid  fa-envelope"
                    inputSize="w-[300px]"></app-input>
         <app-input inputId="password" type="password" [control]="loginForm.controls.password" placeholder="••••••••••••••••••••••••" nameIconLeft="fas  fa-lock"
-                   nameIconRight="fas fa-eye-slash" inputSize="w-[300px]"></app-input>
+                   nameIconRight="fas fa-eye-slash" inputSize="w-[275px]"></app-input>
         <app-button type="submit" size="medium" [isLoading]="loading()" [disabled]="disabled()" (action)="login()" [fullWidth]="true">Connexion</app-button>
         <nav class="mt-4 ms-3 text-caption4 text-tertiary"><a href="#">Mot de passe oublié</a></nav>
       </app-form>

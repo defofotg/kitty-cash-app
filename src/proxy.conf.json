@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://209.182.238.71:1080",
+    "target": "https://209.182.238.71:1080",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
